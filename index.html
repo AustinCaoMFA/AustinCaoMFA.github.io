@@ -1,14 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <section>
-        <p>Hello</p>
-    </section>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Splash</title>   
+        
+        <!-- css -->
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <!-- Owl Stylesheets -->
+        <link href="css/owl.carousel.css" rel="stylesheet">
+        <!-- bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- javascript -->
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/owl.carousel.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+    <body class="login-page">
+
+      <!-- ==== Splash Page Start ==== -->
+      <div class="owl-carousel splash-area">
+        <div class="item">
+          <img src="image/frame1.png" class="animated" />
+          <p class="animated bounceIn">Slide 1</p>
+        </div>
+        <div class="item">
+          <img src="image/frame2.png" class="animated" />
+          <p class="animated bounceIn">Slide 2</p>
+        </div>
+        <div class="item">
+          <img src="image/frame3.png" class="animated" />
+          <p class="animated bounceIn">Slide 3</p>
+        </div>
+        <div class="item">
+          <img src="image/frame4.png" class="animated" />
+          <p class="animated bounceIn">Slide 4</p>
+        </div>
+        <div class="item">
+          <img src="image/frame5.png" class="animated" />
+          <p class="animated bounceIn">Slide 5</p>
+        </div>
+      </div>
+      <!-- ==== Splash Page End ==== -->
+
+      <!-- ==== Login Page Start ==== -->
+      <div class="login-area text-center hidden">
+        <form class="form-signin">
+            <img class="mb-4" src="image/logo.svg" alt="" width="100" height="100">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            <div class="checkbox mb-3">
+                <label>
+                <input type="checkbox" value="remember-me"> Remember me</label>
+            </div>
+            <a class="btn btn-lg btn-primary btn-block" href="question.html">Sign in</a>
+            <p class="mt-5 mb-3 text-white">© copyright </p>
+          </form>
+      </div>
+      <!-- ==== Login Page End ==== -->
+        
+      <script>
+        $(function() {
+            window.onload = function(){
+                var devicewidth = $(window).width();
+                var deviceheight = $(window).height();
+                $(".splash-area .item").css({height:deviceheight});
+            }; 
+
+            var dotswidth = $(".splash-area .dots").width();
+
+            var owl = $('.splash-area').owlCarousel({
+                dots:true,
+                items: 1,
+                smartSpeed:850
+            });
+
+            // Fired before current slide change
+            owl.on('change.owl.carousel', function(e) {
+                var items      = e.item.count;     // Number of items
+                var item       = e.item.index;     // Position of the current item
+
+                $('.splash-area .owl-item .item img').fadeOut();
+                $('.splash-area .owl-item:eq(' + (item+1) + ') .item img').fadeIn();
+                $('.splash-area .owl-item:eq(' + (item-1) + ') .item img').fadeIn();     
+
+                if(item == 4){
+                  console.log("yee");
+                  $('.splash-area').fadeOut("slow");
+                  $('.login-area').fadeIn("slow");                  
+                }                 
+
+            });
+
+            owl.on('drag.owl.carousel', function(e) {
+              var items      = e.item.count;     // Number of items
+              var item       = e.item.index;     // Position of the current item   
+              if(item == (items-1)){
+                  $('.splash-area').fadeOut("slow");
+                  $('.login-area').fadeIn("slow");                  
+              } 
+                         
+            });
+        });
+     </script>
+
+
+    </body>
 </html>
